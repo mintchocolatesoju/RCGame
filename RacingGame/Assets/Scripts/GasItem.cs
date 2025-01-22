@@ -10,6 +10,7 @@ public class GasItem : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.AddGas();
+            Destroy(gameObject);
         }
     }
 }

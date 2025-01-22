@@ -6,7 +6,7 @@ public class Ground : MonoBehaviour
 {
     public Transform[] grounds;
     public float resetPosition = -10f;
-    public float moveSpeed = 20f;
+    public float moveSpeed = 15f;
     public float groundLength = 10f;
 
     // Update is called once per frame

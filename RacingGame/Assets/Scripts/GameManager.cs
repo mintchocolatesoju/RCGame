@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class GameManager : MonoBehaviour
     public int maxGas = 100;
     public int gasDecrease = 10;
     public int gasIncrease = 30;
+
+    public TextMeshProUGUI gasText;
+    public GameObject gameOverScreen;
 
     public bool isGoing = true;
 
@@ -29,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DecreaseGas());
+
     }
 
     IEnumerator DecreaseGas()
@@ -38,10 +44,16 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             gas -= gasDecrease;
             gas = Mathf.Clamp(gas, 0, maxGas);
+            UpdateText();
+
             
             if(gas<=0)
             {
                 isGoing = false;
+                Time.timeScale = 0;
+                gameOverScreen.SetActive(true);
+
+                
             }
         }
     
@@ -51,7 +63,17 @@ public class GameManager : MonoBehaviour
     {
         gas +=gasIncrease;
         gas = Mathf.Clamp(gas,0, maxGas);
+        UpdateText();
     }
 
+    private void UpdateText()
+    {
+        gasText.text = "Gas: " + gas;
+    } 
+    
+    public void ReStart()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }
