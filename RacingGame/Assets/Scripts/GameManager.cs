@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DecreaseGas());
+        UpdateText();
 
     }
 
@@ -73,7 +74,8 @@ public class GameManager : MonoBehaviour
     
     public void ReStart()
     {
-        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
     }
 
 }
